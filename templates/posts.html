@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Posts</title>
+{% endblock %}
+
+{% block body %}
+<a class="btn btn-primary" href="/posts/new" class="stretched-link">Create New Post</a>
+<h1>All Posts</h1>
+    <hr>
+    
+    {% for post in posts %}
+
+    <div class="col-md-6">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary">{{ post.title }}</strong>
+            <h3 class="mb-0"></h3>
+            <div class="mb-1 text-body-secondary">{{post.date_posted}}</div>
+            <p class="card-text mb-auto" style="white-space:pre-wrap">{{ post.content }}</p>
+            {% if post.author %}
+                <h3>Posted By: {{ post.author}}</h3>
+            {% else %}
+                <div class="mb-1 text-body-secondary"> Posted by Anonymous</div>
+            <h3>Anonymous</h3>
+            {% endif %}
+
+            <a class="btn btn-danger"href="/posts/delete/{{post.id}}" class="stretched-link">Delete</a>
+            <br>
+            <a class="btn btn-primary" href="/posts/edit/{{post.id}}" class="stretched-link">Edit</a>
+          </div> 
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}
+
